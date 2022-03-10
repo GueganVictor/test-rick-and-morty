@@ -8,5 +8,8 @@
   "button": {
     "toggle_dark": "Activer/Désactiver le mode sombre",
     "toggle_lang": "Changer de langue"
-  }
+  },
+  "Alive": "Vivant",
+  "Dead": "Décédé",
+  "unknown": "Inconnu"
 }

@@ -8,5 +8,8 @@
   "button": {
     "toggle_dark": "Toggle dark mode",
     "toggle_lang": "Change language"
-  }
+  },
+  "Alive": "Alive",
+  "Dead": "Deceased",
+  "unknown": "Uknown"
 }
