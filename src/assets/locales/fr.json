@@ -6,6 +6,7 @@
   "go-to": "Aller à ",
   "app-name": "Nom Application",
   "button": {
-    "toggle_dark": "Mode Sombre"
+    "toggle_dark": "Activer/Désactiver le mode sombre",
+    "toggle_lang": "Changer de langue"
   }
 }

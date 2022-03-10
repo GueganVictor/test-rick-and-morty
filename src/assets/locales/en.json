@@ -6,6 +6,7 @@
   "go-to": "Go to",
   "app-name": "App Name",
   "button": {
-    "toggle_dark": "Dark Mode"
+    "toggle_dark": "Toggle dark mode",
+    "toggle_lang": "Change language"
   }
 }
