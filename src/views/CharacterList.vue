@@ -1,7 +1,7 @@
 <template>
-  <router-view></router-view>
+    character list view
 </template>
 
 <script setup lang="ts">
-
+    
 </script>
