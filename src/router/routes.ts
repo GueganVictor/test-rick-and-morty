@@ -1,18 +1,29 @@
 import { RouteRecordRaw } from 'vue-router';
-import AboutVue from '../views/About.vue';
-import HomeVue from '../views/Home.vue';
+import CharacterListVue from '../views/CharacterList.vue';
+import CharacterDetailVue from '../views/CharacterDetail.vue';
+import PageNotFoundVue from '../views/PageNotFound.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: HomeVue,
+    redirect: '/characters',
   },
   {
-    path: '/about',
-    name: 'About',
-    component: AboutVue,
+    path: '/characters',
+    name: 'CharacteList',
+    component: CharacterListVue,
   },
+  {
+    path: '/characters/:id',
+    name: 'CharacterDetail',
+    component: CharacterDetailVue,
+  },
+  { 
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: PageNotFoundVue
+},
 ];
 
 export default routes;
