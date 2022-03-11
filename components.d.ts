@@ -9,13 +9,8 @@ declare module 'vue' {
     Hero: typeof import('./src/components/Hero.vue')['default']
     IconCarbonMoon: typeof import('~icons/carbon/moon')['default']
     IconCarbonSun: typeof import('~icons/carbon/sun')['default']
-    IconCifEn: typeof import('~icons/cif/en')['default']
     IconCifFr: typeof import('~icons/cif/fr')['default']
     IconCifGb: typeof import('~icons/cif/gb')['default']
-    'IconCircleFlags:en': typeof import('~icons/ci/rcle-flags-en')['default']
-    'IconCircleFlags:fr': typeof import('~icons/ci/rcle-flags-fr')['default']
-    IconCircleFlagsEn: typeof import('~icons/ci/rcle-flags-en')['default']
-    IconCircleFlagsFr: typeof import('~icons/ci/rcle-flags-fr')['default']
     IconMdiCircle: typeof import('~icons/mdi/circle')['default']
   }
 }
