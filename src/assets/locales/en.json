@@ -9,12 +9,11 @@
     "toggle_dark": "Toggle dark mode",
     "toggle_lang": "Change language"
   },
-  "Alive": "Alive",
-  "Dead": "Deceased",
-  "unknown": "Uknown",
+  "unknown": "Unknown",
   "none": "None",
   "alive": "Alive",
   "dead": "Dead",
   "no-result": "No result",
-  "search": "Search"
+  "search": "Search",
+  "learn-more": "Learn more.."
 }
