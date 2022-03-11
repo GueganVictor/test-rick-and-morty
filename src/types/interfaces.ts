@@ -1,0 +1,30 @@
+import { ICharacter } from './character';
+
+export interface APIInfos {
+  count: number;
+  pages: number;
+  next: string;
+  prev: string;
+}
+
+export interface APIParams {
+  page?: string;
+  name?: string;
+  status?: string;
+}
+
+export interface StoreMutation {
+  results: ICharacter[];
+  info?: APIInfos;
+}
+
+export interface State {
+  characters: ICharacter[];
+  loading: boolean;
+  error: any;
+  info?: APIInfos;
+}
+
+export interface Commit {
+  commit: Function;
+}
