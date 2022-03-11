@@ -1,7 +1,7 @@
 <template>
-    <div class="container mx-auto">
+    <div class="mx-auto">
         <div
-            class="flex justify-center gap-8 flex-wrap md:(grid) place-items-center md:(my-8 gap-8 grid-cols-3) xl:grid-cols-4 2xl:grid-cols-5"
+            class="grid grid-cols-2 gap-8 mx-auto w-max place-items-stretch sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
         >
             <CharacterCard
                 :id="c.id"

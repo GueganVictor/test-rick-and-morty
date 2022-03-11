@@ -1,17 +1,19 @@
 <template>
   <div
-    class="flex flex-col justify-center overflow-hidden text-center text-black cursor-pointer bg-white group rounded-xl w-62.5 transition-transform hover:(transform scale-110)"
+    class="flex flex-col justify-center overflow-hidden text-center text-black cursor-pointer bg-white group rounded-xl w-35 xs:w-50 sm:w-40 md:w-55 lg:w-62.5 transition-transform hover:(transform scale-110)"
   >
     <img
       :src="imageURL"
-      class="object-cover w-62.5 h-62.5"
+      class="object-cover w-full h-auto"
       width="250"
       height="250"
       :alt="getName(name)"
     />
     <div class="flex flex-col px-4">
       <div class="flex-grow" />
-      <h1 class="text-xl font-bold truncate">{{ getName(name) }}</h1>
+      <h1
+        class="text-base font-bold truncate leading-none mt-1 md:(text-lg leading-normal my-0) lg:text-xl"
+      >{{ getName(name) }}</h1>
       <div class="flex items-center pb-1 mx-auto">
         <icon-mdi-circle
           class="text-[0.5rem]"
@@ -21,7 +23,7 @@
       </div>
     </div>
     <div class="flex-grow" />
-    <p class="py-2 bg-green-400">En savoir plus..</p>
+    <p class="py-2 text-sm bg-green-400 md:text-base">En savoir plus..</p>
   </div>
 </template>
 
