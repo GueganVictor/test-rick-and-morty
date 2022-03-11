@@ -9,12 +9,11 @@
     "toggle_dark": "Activer/Désactiver le mode sombre",
     "toggle_lang": "Changer de langue"
   },
-  "Alive": "Vivant",
-  "Dead": "Décédé",
   "unknown": "Inconnu",
   "none": "Aucun",
   "alive": "Vivant",
-  "dead": "Décédé",
+  "dead": "Mort",
   "no-result": "Aucun résultat",
-  "search": "Rechercher"
+  "search": "Rechercher",
+  "learn-more": "En savoir plus.."
 }

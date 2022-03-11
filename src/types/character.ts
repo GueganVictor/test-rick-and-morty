@@ -3,7 +3,7 @@ export interface ICharacter {
   name: string;
   status: string;
   species: string;
-  type: string;
+  type: 'Dead' | 'Alive' | 'Unknown';
   gender: string;
   origin: {
     name: string;

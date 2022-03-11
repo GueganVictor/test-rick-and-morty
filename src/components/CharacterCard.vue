@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="flex-grow" />
-    <p class="py-2 text-sm bg-green-400 md:text-base">En savoir plus..</p>
+    <p class="py-2 text-sm bg-green-400 md:text-base">{{ $t('learn-more') }}</p>
   </div>
 </template>
 
@@ -54,7 +54,7 @@ const props = defineProps({
   },
   status: {
     type: String,
-    default: 'Dead',
+    default: 'dead',
   },
 })
 
