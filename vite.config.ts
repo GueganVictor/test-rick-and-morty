@@ -25,4 +25,9 @@ export default defineConfig({
       include: './src/assets/locales/',
     }),
   ],
+  resolve: {
+    alias: {
+      '@images': path.resolve(__dirname, './src/assets/img'),
+    },
+  },
 });
