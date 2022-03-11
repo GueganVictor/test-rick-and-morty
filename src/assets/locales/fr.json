@@ -11,5 +11,9 @@
   },
   "Alive": "Vivant",
   "Dead": "Décédé",
-  "unknown": "Inconnu"
+  "unknown": "Inconnu",
+  "none": "Aucun",
+  "alive": "Vivant",
+  "dead": "Décédé",
+  "no-result": "Aucun résultat"
 }

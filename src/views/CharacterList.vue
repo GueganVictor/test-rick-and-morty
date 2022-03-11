@@ -2,6 +2,17 @@
   <div class="mx-auto">
     <form class="m-20" @submit.prevent="filterData">
       <input v-model="nameFilter" type="text" class="text-black" />
+
+      <fieldset>
+        <input id="radio_none" v-model="statusFilter" type="radio" name="status" v-bind:value="''" />
+        <label for="none">{{ $t('none') }}</label>
+        <input id="radio_alive" v-model="statusFilter" type="radio" name="status" value="alive" />
+        <label for="alive">{{ $t('alive') }}</label>
+        <input id="radio_dead" v-model="statusFilter" type="radio" name="status" value="dead" />
+        <label for="dead">{{ $t('dead') }}</label>
+        <input id="radio_unknown" v-model="statusFilter" type="radio" name="status" value="unknown" />
+        <label for="unknown">{{ $t('unknown') }}</label>
+      </fieldset>
     </form>
     <div
       v-if="characterList.length > 0"
@@ -16,29 +27,35 @@
         :key="c.id"
       ></CharacterCard>
     </div>
-    <div v-else>No result</div>
+    <div v-else>{{ $t('no-result') }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import { APIParams } from '../types/interfaces';
 
 const store = useStore();
 
-const characterList = computed(() => store.state.characterStore.characters)
-
+const statusFilter = ref("");
 const nameFilter = ref("");
 
-const loadData = (params: APIParams = {}) => {
+const characterList = computed(() => store.state.characterStore.characters)
+
+const loadData = () => {
+  const params: APIParams = { status: statusFilter.value, name: nameFilter.value }
   store.dispatch('fetchCharacters', params)
 }
+
 loadData();
 
+watch(statusFilter, () => {
+  loadData();
+})
+
 const filterData = () => {
-  loadData({ name: nameFilter.value });
-  console.log(nameFilter.value)
+  loadData();
 }
 
 </script>
