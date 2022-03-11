@@ -4,6 +4,7 @@ import { Commit, State, StoreMutation } from '../../types/interfaces';
 const state: State = {
   characters: [],
   loading: false,
+  info: {},
   error: null,
 };
 
@@ -26,18 +27,17 @@ const mutations = {
 };
 
 const actions = {
-  fetchCharacters({ commit }: Commit, filter: any) {
+  async fetchCharacters({ commit }: Commit, filter: any) {
     commit('initCharacterRequest');
-    characterService
-      .getProjects(filter)
-      .then((response) => {
-        commit('getCharacters', response.data);
-      })
-      .catch((error) => {
-        commit('getCharactersError', error);
-      });
+    try {
+      const characters = await characterService.getProjects(filter);
+      commit('getCharacters', characters.data);
+    } catch (error) {
+      commit('getCharactersError', error);
+    }
   },
 };
+
 const getters = {};
 
 export default {

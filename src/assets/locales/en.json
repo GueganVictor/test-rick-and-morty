@@ -11,5 +11,10 @@
   },
   "Alive": "Alive",
   "Dead": "Deceased",
-  "unknown": "Uknown"
+  "unknown": "Uknown",
+  "none": "None",
+  "alive": "Alive",
+  "dead": "Dead",
+  "no-result": "No result",
+  "search": "Search"
 }
