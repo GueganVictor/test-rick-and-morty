@@ -11,6 +11,9 @@ declare module 'vue' {
     IconCarbonSun: typeof import('~icons/carbon/sun')['default']
     IconCifFr: typeof import('~icons/cif/fr')['default']
     IconCifGb: typeof import('~icons/cif/gb')['default']
+    IconMdiArrowLeft: typeof import('~icons/mdi/arrow-left')['default']
+    IconMdiChevronLeft: typeof import('~icons/mdi/chevron-left')['default']
+    IconMdiChevronRight: typeof import('~icons/mdi/chevron-right')['default']
     IconMdiCircle: typeof import('~icons/mdi/circle')['default']
   }
 }

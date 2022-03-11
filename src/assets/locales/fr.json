@@ -15,5 +15,6 @@
   "none": "Aucun",
   "alive": "Vivant",
   "dead": "Décédé",
-  "no-result": "Aucun résultat"
+  "no-result": "Aucun résultat",
+  "search": "Rechercher"
 }

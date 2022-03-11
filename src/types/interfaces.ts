@@ -1,14 +1,14 @@
 import { ICharacter } from './character';
 
 export interface APIInfos {
-  count: number;
-  pages: number;
-  next: string;
-  prev: string;
+  count?: number;
+  pages?: number;
+  next?: string;
+  prev?: string;
 }
 
 export interface APIParams {
-  page?: string;
+  page?: number;
   name?: string;
   status?: string;
 }
