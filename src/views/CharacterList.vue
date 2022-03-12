@@ -1,12 +1,15 @@
 <template>
   <div class="mx-auto">
     <div class="mx-auto w-min">
-      <form class="flex items-center" @submit.prevent="filterData">
+      <form
+        class="items-center block space-y-2 sm:(flex space-y-0)"
+        @submit.prevent="filterData"
+      >
         <div class="flex items-center space-x-2">
           <div class="flex items-center overflow-hidden rounded">
             <input
               v-model="nameFilter"
-              class="relative flex-auto block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
+              class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
               type="text"
             />
             <button
@@ -18,7 +21,7 @@
           </div>
           <p
             v-if="(router.currentRoute.value.query.name ?? '') !== nameFilter"
-            class="text-sm text-green-600"
+            class="hidden text-sm text-green-600 lg:block"
           >
             {{ $t('refresh-alert') }}
           </p>
