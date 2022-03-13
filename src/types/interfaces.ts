@@ -28,3 +28,5 @@ export interface State {
 export interface Commit {
   commit: Function;
 }
+
+export type Status = 'dead' | 'alive' | 'unknown';

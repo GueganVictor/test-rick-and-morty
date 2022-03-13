@@ -80,12 +80,13 @@ const store = useStore();
 const router = useRouter();
 const i18n = useI18n();
 
-const characterId = Number(router.currentRoute.value.params.id as string);
+const characterId = Number(router.currentRoute.value.params.id);
 
 const char: ComputedRef<ICharacter | undefined> = computed(() =>
   store.getters.getStoredCharacterById(characterId)
 );
 
+// If attribute is not defined or unknown we translate it
 const formatAttribute = (att: string) => {
   if (!att || att === 'unknown') return i18n.t('unknown');
   return att;

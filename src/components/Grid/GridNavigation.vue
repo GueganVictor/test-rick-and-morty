@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="store.state.characterStore.info.pages > 1"
-    class="flex items-center justify-center my-8 space-x-2 text-2xl"
+    class="flex items-center justify-center my-4 space-x-2 text-2xl"
   >
     <div class="flex items-center space-x-2">
       <button

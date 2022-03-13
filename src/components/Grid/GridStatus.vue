@@ -34,9 +34,8 @@
 </template>
 
 <script setup lang="ts">
+import { Status } from '../../types/interfaces';
 import { PropType, ref } from 'vue';
-
-type Status = 'dead' | 'alive' | 'unknown';
 
 const props = defineProps({
   filter: {
@@ -57,13 +56,19 @@ statusCheckBoxes.value[props.filter] = true;
 
 const check = (status: Status) => {
   let oneChecked = false;
-  Object.keys(statusCheckBoxes.value).forEach((key) => {
-    const k = key as Status;
-    const v = !statusCheckBoxes.value[k];
-    statusCheckBoxes.value[k] = v ? !v : key === status;
-    oneChecked = statusCheckBoxes.value[k] || oneChecked;
-    if (statusCheckBoxes.value[k]) emit('update:value', key);
+  // Loop through each checkbox
+  (<Status[]>Object.keys(statusCheckBoxes.value)).forEach((key) => {
+    const v = statusCheckBoxes.value[key];
+
+    // If the current checkbox is already we uncheck it. Otherwise if
+    // the current checkbox matches the wanted checkbox, it is set to true
+    statusCheckBoxes.value[key] = v ? key === status : v;
+    oneChecked = statusCheckBoxes.value[key] || oneChecked;
+
+    // Update/Send the new checked box value to the filter
+    if (statusCheckBoxes.value[key]) emit('update:value', key);
   });
+  // If no checkbox is checked, we update the fitler to be empty
   if (!oneChecked) emit('update:value', '');
 };
 </script>

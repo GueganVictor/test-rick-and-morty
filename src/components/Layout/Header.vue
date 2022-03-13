@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { isDark, toggleDark } from '../modules/dark';
+import { isDark, toggleDark } from '../../modules/dark';
 </script>
 
 <style scoped>
