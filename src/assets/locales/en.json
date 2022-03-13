@@ -17,5 +17,15 @@
   "search": "Search",
   "learn-more": "Learn more..",
   "refresh-alert": "Click search to refresh results",
-  "picture_of": "Picture of "
+  "picture_of": "Picture of ",
+  "return-to-list": "Go back to the list",
+  "species": "Species",
+  "origin": "Origin",
+  "location": "Location",
+  "gender": "Gender",
+  "status": "Status",
+  "type": "Type",
+  "episodes": "Number of appearances",
+  "error": "Error !",
+  "character-not-found": "Unable to load the character"
 }
