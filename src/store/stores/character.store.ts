@@ -38,7 +38,10 @@ const actions = {
   },
 };
 
-const getters = {};
+const getters = {
+  getStoredCharacterById: (state: State) => (id: number) =>
+    state.characters.find((x) => x.id === id),
+};
 
 export default {
   state,
