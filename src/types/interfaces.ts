@@ -13,7 +13,7 @@ export interface APIParams {
   status?: string;
 }
 
-export interface StoreMutation {
+export interface CharactersQueryResult {
   results: ICharacter[];
   info?: APIInfos;
 }

@@ -12,7 +12,7 @@ export default {
   getProjects(params: APIParams): Promise<AxiosResponse<ICharacter[]>> {
     return serviceInstance.get('', { params });
   },
-  getProject(_id: string): Promise<AxiosResponse<ICharacter>> {
+  getProject(_id: number): Promise<AxiosResponse<ICharacter>> {
     return serviceInstance.get(`${_id}`);
   },
 };
