@@ -13,7 +13,7 @@ export interface ICharacter {
     name: string;
     url: string;
   };
-  imag: string;
+  image: string;
   episode: string[];
   url: string;
   created: string;

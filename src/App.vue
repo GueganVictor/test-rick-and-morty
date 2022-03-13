@@ -1,11 +1,12 @@
 <template>
-  <div class="bg-black text-white dark:(bg-amber-200 text-black) w-full">
+  <div
+    class="flex flex-col w-full min-h-screen text-white bg-black dark:(bg-amber-200 text-black)"
+  >
     <Hero></Hero>
-    <router-view></router-view>
+    <router-view class="flex-grow"></router-view>
+
     <Footer></Footer>
   </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
