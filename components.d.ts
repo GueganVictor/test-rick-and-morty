@@ -6,6 +6,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     CharacterCard: typeof import('./src/components/CharacterCard.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
+    GridNavigation: typeof import('./src/components/Grid/GridNavigation.vue')['default']
+    GridSearch: typeof import('./src/components/Grid/GridSearch.vue')['default']
+    GridStatus: typeof import('./src/components/Grid/GridStatus.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Hero: typeof import('./src/components/Hero.vue')['default']
     IconCarbonMoon: typeof import('~icons/carbon/moon')['default']

@@ -5,27 +5,7 @@
         class="items-center block space-y-2 sm:(flex space-y-0)"
         @submit.prevent="filterData"
       >
-        <div class="flex items-center space-x-2">
-          <div class="flex items-center overflow-hidden rounded">
-            <input
-              v-model="nameFilter"
-              class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border-2 border-white border-solid form-control bg-clip-padding focus:(text-gray-700 bg-white border-rick-green outline-none)"
-              type="text"
-            />
-            <button
-              class="flex items-center inline-block h-10 px-6 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-rick-green shadow-md btn hover:bg-rick-green-darken hover:shadow-lg focus:(bg-rick-green-darken shadow-lg ring-0) active:(shadow-lg bg-blue-800) dark:text-black"
-              type="submit"
-            >
-              {{ $t('search') }}
-            </button>
-          </div>
-          <p
-            v-if="(router.currentRoute.value.query.name ?? '') !== nameFilter"
-            class="hidden text-sm text-rick-green dark:text-black lg:block"
-          >
-            {{ $t('refresh-alert') }}
-          </p>
-        </div>
+        <GridSearch :current-filter="nameFilter" v-model:value="nameFilter"></GridSearch>
         <div class="flex-grow" />
         <fieldset class="flex space-x-4">
           <div class="flex items-center space-x-0.5">
@@ -75,31 +55,10 @@
       </div>
       <div class="mx-auto min-w-75vw" v-else>{{ $t('no-result') }}</div>
     </div>
-    <div
-      v-if="store.state.characterStore.info.pages > 1"
-      class="flex items-center justify-center my-8 space-x-2 text-2xl"
-    >
-      <div class="flex items-center space-x-2">
-        <button
-          class="navigation-chevron"
-          :disabled="canNavigate(-1)"
-          @click="navigate(-1)"
-        >
-          <icon-mdi-chevron-left />
-        </button>
-      </div>
-      <span>{{ currentPage }}</span>
-      <div class="flex items-center space-x-2">
-        <span>&nbsp;/ {{ store.state.characterStore.info.pages }}</span>
-        <button
-          class="navigation-chevron"
-          :disabled="canNavigate(1)"
-          @click="navigate(1)"
-        >
-          <icon-mdi-chevron-right />
-        </button>
-      </div>
-    </div>
+    <GridNavigation
+      :current-page="currentPage"
+      @navigate="navigate($event)"
+    ></GridNavigation>
   </div>
 </template>
 
@@ -170,16 +129,10 @@ const loadData = () => {
 };
 loadData();
 
-const navigate = (pageOffset: number) => {
-  if (canNavigate(pageOffset)) return;
-  currentPage.value = currentPage.value + pageOffset;
+const navigate = (newPage: number) => {
+  currentPage.value = newPage;
   goToPage(currentPage.value);
   loadData();
-};
-
-const canNavigate = (pageOffset: number) => {
-  const n = currentPage.value + pageOffset;
-  return n < 1 || n > store.state.characterStore.info.pages;
 };
 
 const filterData = () => {
