@@ -2,7 +2,7 @@
   <div class="flex items-center space-x-2">
     <div class="flex items-center overflow-hidden rounded">
       <input
-        :value="currentFilter"
+        :value="filter"
         @input="emitUpdate($event)"
         class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border-2 border-white border-solid form-control bg-clip-padding focus:(text-gray-700 bg-white border-rick-green outline-none)"
         type="text"
@@ -15,7 +15,7 @@
       </button>
     </div>
     <p
-      v-if="(route.query.name ?? '') !== currentFilter"
+      v-if="(route.query.name ?? '') !== filter"
       class="hidden text-sm text-rick-green dark:text-black lg:block"
     >
       {{ $t('refresh-alert') }}
@@ -27,7 +27,7 @@
 import { useRoute } from 'vue-router';
 
 const props = defineProps({
-  currentFilter: {
+  filter: {
     type: String,
     default: '',
   },
