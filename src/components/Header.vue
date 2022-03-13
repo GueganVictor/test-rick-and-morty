@@ -1,6 +1,5 @@
 <template>
-  <div class="flex m-4 space-x-2 text-xl text-white">
-    <div class="flex-grow" />
+  <div class="absolute top-0 right-0 flex m-4 space-x-2 text-xl text-white">
     <div>
       <button
         class="button dark:(text-black)"

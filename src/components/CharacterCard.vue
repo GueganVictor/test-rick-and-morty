@@ -1,7 +1,7 @@
 <template>
   <router-link
     :to="`/characters/${id}`"
-    class="flex flex-col justify-center overflow-hidden rainbow-border text-center text-black cursor-pointer bg-white group rounded-xl w-35 xs:w-50 sm:w-40 md:w-55 lg:w-62.5 transition-transform"
+    class="flex flex-col justify-center overflow-hidden rainbow-border text-center text-black cursor-pointer bg-white text-white ) group rounded-xl w-35 xs:w-50 sm:w-40 md:w-55 lg:w-62.5 transition-transform duration-200 ease"
   >
     <img
       :src="imageURL"
@@ -42,7 +42,7 @@ const getName = (name: string) => {
 
 const getStatusColor = () => {
   const colors = {
-    alive: 'text-green-600',
+    alive: 'text-rick-green',
     dead: 'text-red-600',
     unknown: 'text-yellow-600',
   };
@@ -84,7 +84,7 @@ const props = defineProps({
 
 .rainbow-border:hover,
 .rainbow-border:focus {
-  transform: scale(1.1);
+  transform: scale(1.05);
   border: double 4px transparent;
   background-image: linear-gradient(white, white),
     linear-gradient(

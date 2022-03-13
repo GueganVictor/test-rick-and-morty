@@ -9,11 +9,11 @@
           <div class="flex items-center overflow-hidden rounded">
             <input
               v-model="nameFilter"
-              class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border-2 border-white border-solid form-control bg-clip-padding focus:(text-gray-700 bg-white border-green-600 outline-none)"
+              class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border-2 border-white border-solid form-control bg-clip-padding focus:(text-gray-700 bg-white border-rick-green outline-none)"
               type="text"
             />
             <button
-              class="flex items-center inline-block h-10 px-6 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-green-600 shadow-md btn hover:bg-green-700 hover:shadow-lg focus:(bg-green-700 shadow-lg ring-0) active:(shadow-lg bg-blue-800 )"
+              class="flex items-center inline-block h-10 px-6 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-rick-green shadow-md btn hover:bg-rick-green-darken hover:shadow-lg focus:(bg-rick-green-darken shadow-lg ring-0) active:(shadow-lg bg-blue-800) dark:text-black"
               type="submit"
             >
               {{ $t('search') }}
@@ -21,7 +21,7 @@
           </div>
           <p
             v-if="(router.currentRoute.value.query.name ?? '') !== nameFilter"
-            class="hidden text-sm text-green-600 lg:block"
+            class="hidden text-sm text-rick-green dark:text-black lg:block"
           >
             {{ $t('refresh-alert') }}
           </p>
@@ -32,7 +32,7 @@
             <input
               id="radio_alive"
               type="checkbox"
-              class="w-5 h-5 accent-green-600 form-checkbox"
+              class="w-5 h-5 accent-rick-green dark:outline-black"
               v-model="statusCheckBoxes.alive"
               @change="check('alive')"
             />
@@ -42,7 +42,7 @@
             <input
               id="radio_dead"
               type="checkbox"
-              class="w-5 h-5 accent-green-600 form-checkbox"
+              class="w-5 h-5 accent-rick-green dark:outline-black"
               v-model="statusCheckBoxes.dead"
               @change="check('dead')"
             />
@@ -52,7 +52,7 @@
             <input
               id="radio_unknown"
               type="checkbox"
-              class="w-5 h-5 accent-green-600 form-checkbox"
+              class="w-5 h-5 accent-rick-green dark:outline-black"
               v-model="statusCheckBoxes.unknown"
               @change="check('unknown')"
             />
@@ -81,7 +81,7 @@
     >
       <div class="flex items-center space-x-2">
         <button
-          class="leading-none bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default)"
+          class="navigation-chevron"
           :disabled="canNavigate(-1)"
           @click="navigate(-1)"
         >
@@ -92,7 +92,7 @@
       <div class="flex items-center space-x-2">
         <span>&nbsp;/ {{ store.state.characterStore.info.pages }}</span>
         <button
-          class="leading-none bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default)"
+          class="navigation-chevron"
           :disabled="canNavigate(1)"
           @click="navigate(1)"
         >
@@ -203,3 +203,9 @@ const goToPage = (pageNb: number) => {
   });
 };
 </script>
+
+<style scoped>
+.navigation-chevron {
+  @apply leading-none bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default) dark:(bg-black bg-opacity-20 hover:bg-opacity-40 disabled:bg-opacity-10);
+}
+</style>
