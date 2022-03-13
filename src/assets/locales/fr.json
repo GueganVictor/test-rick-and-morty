@@ -17,5 +17,15 @@
   "search": "Rechercher",
   "learn-more": "En savoir plus..",
   "refresh-alert": "Rechercher pour actualiser",
-  "picture_of": "Photo de "
+  "picture_of": "Photo de ",
+  "return-to-list": "Retourner à la liste",
+  "species": "Espèce",
+  "origin": "Origine",
+  "location": "Emplacement",
+  "gender": "Genre",
+  "status": "Statut",
+  "type": "Type",
+  "episodes": "Nombre d'apparition",
+  "error": "Erreur !",
+  "character-not-found": "Impossible de charger le personnage"
 }
