@@ -9,11 +9,11 @@
           <div class="flex items-center overflow-hidden rounded">
             <input
               v-model="nameFilter"
-              class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
+              class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border-2 border-white border-solid form-control bg-clip-padding focus:(text-gray-700 bg-white border-green-600 outline-none)"
               type="text"
             />
             <button
-              class="flex items-center inline-block h-10 px-6 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-green-600 shadow-md btn hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+              class="flex items-center inline-block h-10 px-6 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-green-600 shadow-md btn hover:bg-green-700 hover:shadow-lg focus:(bg-green-700 shadow-lg ring-0) active:(shadow-lg bg-blue-800 )"
               type="submit"
             >
               {{ $t('search') }}
@@ -80,14 +80,22 @@
       class="flex items-center justify-center my-8 space-x-2 text-2xl"
     >
       <div class="flex items-center space-x-2">
-        <button class="bg-white rounded-full bg-opacity-10" @click="navigate(-1)">
+        <button
+          class="leading-none bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default)"
+          :disabled="canNavigate(-1)"
+          @click="navigate(-1)"
+        >
           <icon-mdi-chevron-left />
         </button>
       </div>
       <span>{{ currentPage }}</span>
       <div class="flex items-center space-x-2">
         <span>&nbsp;/ {{ store.state.characterStore.info.pages }}</span>
-        <button class="bg-white rounded-full bg-opacity-10" @click="navigate(1)">
+        <button
+          class="leading-none bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default)"
+          :disabled="canNavigate(1)"
+          @click="navigate(1)"
+        >
           <icon-mdi-chevron-right />
         </button>
       </div>
@@ -163,11 +171,15 @@ const loadData = () => {
 loadData();
 
 const navigate = (pageOffset: number) => {
-  const newPageIndex = currentPage.value + pageOffset;
-  if (newPageIndex < 1 || newPageIndex > store.state.characterStore.info.pages) return;
-  currentPage.value = newPageIndex;
+  if (canNavigate(pageOffset)) return;
+  currentPage.value = currentPage.value + pageOffset;
   goToPage(currentPage.value);
   loadData();
+};
+
+const canNavigate = (pageOffset: number) => {
+  const n = currentPage.value + pageOffset;
+  return n < 1 || n > store.state.characterStore.info.pages;
 };
 
 const filterData = () => {
