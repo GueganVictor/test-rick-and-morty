@@ -8,7 +8,7 @@
       <p>{{ $t('return-to-list') }}</p>
     </button>
     <h1 class="mt-1 mb-8 text-3xl sm:text-5xl">
-      <span class="char-label">#{{ formatAttribute(char.id) }}</span>
+      <span class="char-label">#{{ char.id }}</span>
       {{ char.name }}
     </h1>
     <div class="block sm:(flex space-x-8 items-center)">
