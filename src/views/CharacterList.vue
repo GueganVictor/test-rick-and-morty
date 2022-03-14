@@ -2,30 +2,32 @@
   <div class="mx-auto">
     <div class="mx-auto w-min">
       <form
-        class="relative items-center block space-y-2 sm:(flex space-y-0)"
+        class="relative items-center block space-y-2 md:(flex space-y-0)"
         @keydown.enter.prevent="goToPage(1, nameFilter)"
         @submit.prevent="goToPage(1, nameFilter)"
       >
-        <div class="absolute flex space-x-2 left-0 -top-8">
+        <div class="absolute space-y-2 left-0 -top-7">
           <label for="filter-search">{{ $t('search-by-name') }} : </label>
-          <button
-            v-if="isFiltering()"
-            class="flex items-center text-black bg-rick-green rounded-full pr-3 pl-2 py-0.5 hover:bg-rick-green-darken"
-            @click="resetFilter"
-          >
-            <icon-mdi-broom class="leading-none rounded-full" /> {{ $t('clear-filter') }}
-          </button>
         </div>
         <GridFilterSearch
           :filter="nameFilter"
           v-model:value="nameFilter"
         ></GridFilterSearch>
         <div class="flex-grow" />
-        <GridFilterStatus
-          :filter="statusFilter"
-          v-model:value="statusFilter"
-          @update-status="updateStatus($event)"
-        ></GridFilterStatus>
+        <div class="block space-y-2 xs:(flex space-y-0)">
+          <button
+            v-if="isFiltering()"
+            class="flex items-center text-black bg-rick-green rounded-full whitespace-nowrap md:ml-4 mr-4 pr-3 pl-2 py-0.5 hover:bg-rick-green-darken"
+            @click="resetFilter"
+          >
+            <icon-mdi-broom class="leading-none rounded-full" /> {{ $t('clear-filter') }}
+          </button>
+          <GridFilterStatus
+            :filter="statusFilter"
+            v-model:value="statusFilter"
+            @update-status="updateStatus($event)"
+          ></GridFilterStatus>
+        </div>
       </form>
       <GridCharacterList :characters="characterList"></GridCharacterList>
     </div>
@@ -110,6 +112,7 @@ const resetFilter = () => {
 /**
  * Updates the URL parameters to match the filters
  * @param pageNb New page number
+ * @param search filter value from name filter
  */
 const goToPage = (pageNb: number, search: string | undefined = undefined) => {
   currentPage.value = pageNb;
@@ -137,7 +140,7 @@ const updateFilterValues = (params: APIParams) => {
 };
 
 // Everytime the URL is changed, we update the data
-// Watcher is called on page loadd in order to retrieve
+// Watcher is called on page load in order to retrieve
 // filter values from URL parameters
 watch(() => router.currentRoute.value.query, updateFilterValues, {
   immediate: true,

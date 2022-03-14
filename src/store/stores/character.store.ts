@@ -23,7 +23,7 @@ const mutations = {
    * @param state State of the store
    * @param QueryResult Characters and API infos
    */
-  getCharactersSucces(state: State, { results, info }: CharactersQueryResult) {
+  getCharactersSuccess(state: State, { results, info }: CharactersQueryResult) {
     state.characters = [...results];
     state.info = info;
     state.loading = false;
@@ -37,11 +37,12 @@ const mutations = {
    */
   getCharactersError(state: State, error: unknown) {
     state.characters = [];
+    state.info = {};
     state.loading = false;
     state.error = error;
   },
   /**
-   * Add or remplace selected character to the character list
+   * Add or replace selected character to the character list
    * @param state State of the store
    * @param character Retrieved character
    */
@@ -74,7 +75,7 @@ const actions = {
     commit('initCharacterRequest');
     try {
       const characters = await characterService.getCharacters(filter);
-      commit('getCharactersSucces', characters.data);
+      commit('getCharactersSuccess', characters.data);
     } catch (error) {
       commit('getCharactersError', error);
     }
@@ -82,7 +83,7 @@ const actions = {
   /**
    * Fetch character data by id from service and commit to store
    * @param commit Commit store function
-   * @param filter Query filter
+   * @param data id of the character
    */
   async fetchCharacterById({ commit }: Commit, data: { id: number }) {
     commit('initCharacterRequest');
