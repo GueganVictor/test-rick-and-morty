@@ -95,9 +95,3 @@ watch(
   { immediate: true }
 );
 </script>
-
-<style scoped>
-.navigation-chevron {
-  @apply leading-none bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default) dark:(bg-black bg-opacity-20 hover:bg-opacity-40 disabled:bg-opacity-10);
-}
-</style>
