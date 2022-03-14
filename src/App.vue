@@ -4,7 +4,9 @@
   >
     <Header></Header>
     <Hero></Hero>
-    <div class="flex-grow"><router-view></router-view></div>
+    <div class="flex-grow">
+      <router-view></router-view>
+    </div>
 
     <Footer></Footer>
   </div>

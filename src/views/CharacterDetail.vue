@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto" v-if="char">
+  <div class="mx-auto w-max" v-if="char">
     <button
       @click="goBack()"
       class="flex items-center space-x-1 border-b border-transparent hover:border-white dark:hover:border-black"
@@ -93,7 +93,11 @@ const formatAttribute = (att: string) => {
 };
 
 const goBack = () => {
-  router.push({ path: '/characters' });
+  if (!router.options.history.state.back) {
+    router.push({ path: '/characters' });
+    return;
+  }
+  router.go(-1);
 };
 
 store.dispatch('fetchCharacterById', { id: characterId });

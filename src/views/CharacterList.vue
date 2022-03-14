@@ -65,6 +65,7 @@ const navigate = (newPage: number) => {
 
 // When status is updated, go back to first page
 const updateStatus = (event: string) => {
+  statusFilter.value = event;
   goToPage(1);
 };
 
@@ -88,7 +89,7 @@ watch(
   (params: APIParams) => {
     statusFilter.value = params.status ?? '';
     nameFilter.value = params.name ?? '';
-    currentPage.value = computePageNumber();
+    currentPage.value = computePageNumber() ?? 1;
     loadData(params);
   },
   { immediate: true }
