@@ -31,5 +31,7 @@
   "try-different-query": "Try a different query",
   "created": "Created",
   "character_list": "Character List",
-  "app_name": "Rick & Morty Explorator"
+  "app_name": "Rick & Morty Explorator",
+  "female": "Female",
+  "male": "Male"
 }

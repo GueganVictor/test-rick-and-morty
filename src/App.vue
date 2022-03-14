@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex flex-col w-full min-h-screen text-white bg-black dark:(bg-beige text-black)"
+    class="relative flex flex-col w-full min-h-screen text-white bg-dark-800 dark:(bg-beige text-black)"
   >
     <Header></Header>
     <Hero></Hero>

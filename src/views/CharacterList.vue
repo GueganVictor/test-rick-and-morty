@@ -3,15 +3,15 @@
     <div class="mx-auto w-min">
       <form
         class="relative items-center block space-y-2 sm:(flex space-y-0)"
-        @keydown.enter.prevent="goToPage(1)"
-        @submit.prevent="goToPage(1)"
+        @keydown.enter.prevent="goToPage(1, nameFilter)"
+        @submit.prevent="goToPage(1, nameFilter)"
       >
         <button
           v-if="isFiltering()"
-          class="absolute flex items-center left-0 -top-7"
+          class="absolute flex items-center text-black bg-rick-green rounded-full pr-2 pl-1 py-0.5 left-0 -top-9 hover:bg-rick-green-darken"
           @click="resetFilter"
         >
-          <icon-mdi-close class="text-sm" />Reset filters
+          <icon-mdi-broom class="leading-none rounded-full" /> Clear search
         </button>
         <GridFilterSearch
           :filter="nameFilter"
@@ -108,11 +108,12 @@ const resetFilter = () => {
  * Updates the URL parameters to match the filters
  * @param pageNb New page number
  */
-const goToPage = (pageNb: number) => {
+const goToPage = (pageNb: number, search: string | undefined = undefined) => {
   currentPage.value = pageNb;
   let params: APIParams = {};
   // Check values in order to avoid blank values in query params
-  if (nameFilter.value) params.name = nameFilter.value;
+  if (nameFilter.value)
+    params.name = (search ?? router.currentRoute.value.query.name) as string;
   if (statusFilter.value) params.status = statusFilter.value;
   if (currentPage.value) params.page = currentPage.value;
   router.push({

@@ -43,11 +43,11 @@
         </div>
         <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('gender') }}</label>
-          <p class="text-xl">{{ formatAttribute(char.gender) }}</p>
+          <p class="text-xl">{{ $t(char.gender.toLocaleLowerCase()) }}</p>
         </div>
         <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('status') }}</label>
-          <p class="text-xl">{{ formatAttribute(char.status) }}</p>
+          <p class="text-xl">{{ $t(char.status.toLocaleLowerCase()) }}</p>
         </div>
         <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('type') }}</label>

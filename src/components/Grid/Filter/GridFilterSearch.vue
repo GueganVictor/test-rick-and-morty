@@ -9,9 +9,9 @@
         type="text"
       />
       <button
-        class="flex bg-rick-green items-center inline-block h-10 px-6 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out shadow-md 
+        class="flex bg-rick-green items-center inline-block h-10 px-6 text-xs text-black font-medium leading-tight  uppercase transition duration-150 ease-in-out shadow-md 
                hover:(bg-rick-green-darken shadow-lg) focus:(bg-rick-green-darken shadow-lg ring-0) 
-               active:(shadow-lg bg-blue-800) dark:(text-black)"
+               active:(shadow-lg bg-blue-800)"
         type="submit"
       >
         {{ $t('search') }}

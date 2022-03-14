@@ -19,10 +19,12 @@ declare module 'vue' {
     IconCifFr: typeof import('~icons/cif/fr')['default']
     IconCifGb: typeof import('~icons/cif/gb')['default']
     IconMdiArrowLeft: typeof import('~icons/mdi/arrow-left')['default']
+    IconMdiBroom: typeof import('~icons/mdi/broom')['default']
     IconMdiChevronLeft: typeof import('~icons/mdi/chevron-left')['default']
     IconMdiChevronRight: typeof import('~icons/mdi/chevron-right')['default']
     IconMdiCircle: typeof import('~icons/mdi/circle')['default']
     IconMdiClose: typeof import('~icons/mdi/close')['default']
+    IconMdiEraser: typeof import('~icons/mdi/eraser')['default']
   }
 }
 
