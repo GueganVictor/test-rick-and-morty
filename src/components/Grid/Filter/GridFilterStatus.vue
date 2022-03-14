@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { Status } from '../../types/interfaces';
+import { Status } from '../../../types/interfaces';
 import { PropType, ref, watch } from 'vue';
 
 const props = defineProps({
@@ -74,7 +74,7 @@ const check = (status: Status | '') => {
     // Update/Send the new checked box value to the filter
     if (statusCheckBoxes.value[key]) emit('update-status', key);
   });
-  // If no checkbox is checked, we update the fitler to be empty
+  // If no checkbox is checked, we update the filter to be empty
   if (!oneChecked) emit('update-status', '');
 };
 

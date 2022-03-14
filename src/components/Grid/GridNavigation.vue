@@ -39,7 +39,7 @@ const store = useStore();
 /**
  * Returns if navigation is available to new page
  * @param pageOffset Offset from current page number
- * @returns Is navigation avaible to new page
+ * @returns Is navigation available to new page
  */
 const canNavigate = (pageOffset: number) => {
   const n = props.currentPage + pageOffset;
@@ -47,7 +47,7 @@ const canNavigate = (pageOffset: number) => {
 };
 
 /**
- * Emits navigation update to parent componenet if available
+ * Emits navigation update to parent component if available
  * @param pageOffset Offset from current page number
  */
 const navigate = (pageOffset: number) => {

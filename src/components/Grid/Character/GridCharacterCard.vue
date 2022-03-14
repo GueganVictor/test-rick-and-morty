@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Status } from '../../types/interfaces';
+import { Status } from '../../../types/interfaces';
 
 const props = defineProps({
   id: {

@@ -13,13 +13,16 @@
         >
           <icon-mdi-close class="text-sm" />Reset filters
         </button>
-        <GridSearch :filter="nameFilter" v-model:value="nameFilter"></GridSearch>
+        <GridFitlerSearch
+          :filter="nameFilter"
+          v-model:value="nameFilter"
+        ></GridFitlerSearch>
         <div class="flex-grow" />
-        <GridStatus
+        <GridFilterStatus
           :filter="statusFilter"
           v-model:value="statusFilter"
           @update-status="updateStatus($event)"
-        ></GridStatus>
+        ></GridFilterStatus>
       </form>
       <GridCharacterList :characters="characterList"></GridCharacterList>
     </div>
@@ -49,7 +52,7 @@ const nameFilter = ref('');
 const currentPage = ref(1);
 
 /**
- * Retreives page number from page URL, if it isn't a number, send back to the first page
+ * Retrieves page number from page URL, if it isn't a number, send back to the first page
  * @returns The new page number or undefined
  */
 const computePageNumber = (): number | undefined => {
@@ -127,7 +130,7 @@ const updateFilterValues = (params: APIParams) => {
 };
 
 // Everytime the URL is changed, we update the data
-// Watcher is called on page laod in order to retreive
+// Watcher is called on page loadd in order to retrieve
 // filter values from URL parameters
 watch(() => router.currentRoute.value.query, updateFilterValues, {
   immediate: true,
