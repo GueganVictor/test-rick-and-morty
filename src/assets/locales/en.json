@@ -33,5 +33,6 @@
   "character_list": "Character List",
   "app_name": "Rick & Morty Explorator",
   "female": "Female",
-  "male": "Male"
+  "male": "Male",
+  "clear-filter": "Clear filters"
 }

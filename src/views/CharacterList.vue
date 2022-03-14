@@ -8,10 +8,10 @@
       >
         <button
           v-if="isFiltering()"
-          class="absolute flex items-center text-black bg-rick-green rounded-full pr-2 pl-1 py-0.5 left-0 -top-9 hover:bg-rick-green-darken"
+          class="absolute flex items-center text-black bg-rick-green rounded-full pr-3 pl-2 py-0.5 left-0 -top-9 hover:bg-rick-green-darken"
           @click="resetFilter"
         >
-          <icon-mdi-broom class="leading-none rounded-full" /> Clear search
+          <icon-mdi-broom class="leading-none rounded-full" /> {{ $t('clear-filter') }}
         </button>
         <GridFilterSearch
           :filter="nameFilter"
