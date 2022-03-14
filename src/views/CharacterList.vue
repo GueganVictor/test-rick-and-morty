@@ -7,7 +7,11 @@
       >
         <GridSearch :filter="nameFilter" v-model:value="nameFilter"></GridSearch>
         <div class="flex-grow" />
-        <GridStatus :filter="statusFilter" v-model:value="statusFilter"></GridStatus>
+        <GridStatus
+          :filter="statusFilter"
+          v-model:value="statusFilter"
+          @update-status="updateStatus($event)"
+        ></GridStatus>
       </form>
       <GridCharacterList :characters="characterList"></GridCharacterList>
     </div>
@@ -38,49 +42,33 @@ const computePageNumber = (): number | undefined => {
   return pageNb;
 };
 
-// Retreives status or name from page URL
-const computeStatusName = (key: 'status' | 'name'): string | undefined => {
-  const charName = router.currentRoute.value.query[key];
-  if (!charName) return undefined;
-  return String(charName);
-};
-
 // Filters
-const statusFilter = ref(computeStatusName('status') ?? '');
-const nameFilter = ref(computeStatusName('name') ?? '');
-const currentPage = ref(computePageNumber() ?? 1);
+const statusFilter = ref('');
+const nameFilter = ref('');
+const currentPage = ref();
 
 const characterList = computed(() => store.state.characterStore.characters);
 
-const loadData = () => {
-  const params: APIParams = {
-    status: statusFilter.value,
-    name: nameFilter.value,
-    page: currentPage.value,
-  };
+const loadData = (params: APIParams) => {
   store.dispatch('fetchCharacters', params);
 };
-loadData();
 
-// Update URL params and load new data
+const filterData = () => {
+  goToPage(1);
+};
+
+// Update URL params
 const navigate = (newPage: number) => {
   currentPage.value = newPage;
   goToPage(currentPage.value);
-  loadData();
 };
 
-// On filter update, navigate page to the first page and load data
-const filterData = () => {
+// When status is updated, go back to first page
+const updateStatus = (event: string) => {
   goToPage(1);
-  loadData();
 };
 
-// Whenever we change the status
-watch(statusFilter, () => {
-  filterData();
-});
-
-// Navigate to given page number with current filters
+// Update the URL to match the filters
 const goToPage = (pageNb: number) => {
   currentPage.value = pageNb;
   let params: APIParams = {};
@@ -93,6 +81,18 @@ const goToPage = (pageNb: number) => {
     query: params as LocationQueryRaw,
   });
 };
+
+// Everytime the URL is changed, we update the data
+watch(
+  () => router.currentRoute.value.query,
+  (params: APIParams) => {
+    statusFilter.value = params.status ?? '';
+    nameFilter.value = params.name ?? '';
+    currentPage.value = computePageNumber();
+    loadData(params);
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped>

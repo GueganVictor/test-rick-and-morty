@@ -27,5 +27,6 @@
   "type": "Type",
   "episodes": "Nombre d'apparition",
   "error": "Erreur !",
-  "character-not-found": "Impossible de charger le personnage"
+  "character-not-found": "Impossible de charger le personnage",
+  "try-different-query": "Essayez une autre recherche"
 }

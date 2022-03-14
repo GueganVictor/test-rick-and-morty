@@ -50,7 +50,7 @@ const statusCheckBoxes = ref({
   unknown: ref(false),
 });
 
-const emit = defineEmits(['update:value']);
+const emit = defineEmits(['update-status']);
 
 statusCheckBoxes.value[props.filter] = true;
 
@@ -66,9 +66,9 @@ const check = (status: Status) => {
     oneChecked = statusCheckBoxes.value[key] || oneChecked;
 
     // Update/Send the new checked box value to the filter
-    if (statusCheckBoxes.value[key]) emit('update:value', key);
+    if (statusCheckBoxes.value[key]) emit('update-status', key);
   });
   // If no checkbox is checked, we update the fitler to be empty
-  if (!oneChecked) emit('update:value', '');
+  if (!oneChecked) emit('update-status', '');
 };
 </script>
