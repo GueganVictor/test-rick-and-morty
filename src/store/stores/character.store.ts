@@ -26,7 +26,6 @@ const mutations = {
     state.error = error;
   },
   getCharacter(state: State, char: ICharacter) {
-    console.log(char, state.characters);
     const charIndex = state.characters.findIndex((x) => char.id);
     if (charIndex === -1) state.characters.push(char);
     else state.characters[charIndex] = char;

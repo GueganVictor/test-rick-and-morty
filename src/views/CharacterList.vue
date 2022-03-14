@@ -5,101 +5,20 @@
         class="items-center block space-y-2 sm:(flex space-y-0)"
         @submit.prevent="filterData"
       >
-        <div class="flex items-center space-x-2">
-          <div class="flex items-center overflow-hidden rounded">
-            <input
-              v-model="nameFilter"
-              class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 transition ease-in-out bg-white border-2 border-white border-solid form-control bg-clip-padding focus:(text-gray-700 bg-white border-rick-green outline-none)"
-              type="text"
-            />
-            <button
-              class="flex items-center inline-block h-10 px-6 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-rick-green shadow-md btn hover:bg-rick-green-darken hover:shadow-lg focus:(bg-rick-green-darken shadow-lg ring-0) active:(shadow-lg bg-blue-800) dark:text-black"
-              type="submit"
-            >
-              {{ $t('search') }}
-            </button>
-          </div>
-          <p
-            v-if="(router.currentRoute.value.query.name ?? '') !== nameFilter"
-            class="hidden text-sm text-rick-green dark:text-black lg:block"
-          >
-            {{ $t('refresh-alert') }}
-          </p>
-        </div>
+        <GridSearch :filter="nameFilter" v-model:value="nameFilter"></GridSearch>
         <div class="flex-grow" />
-        <fieldset class="flex space-x-4">
-          <div class="flex items-center space-x-0.5">
-            <input
-              id="radio_alive"
-              type="checkbox"
-              class="w-5 h-5 accent-rick-green dark:outline-black"
-              v-model="statusCheckBoxes.alive"
-              @change="check('alive')"
-            />
-            <label for="alive">{{ $t('alive') }}</label>
-          </div>
-          <div class="flex items-center space-x-0.5">
-            <input
-              id="radio_dead"
-              type="checkbox"
-              class="w-5 h-5 accent-rick-green dark:outline-black"
-              v-model="statusCheckBoxes.dead"
-              @change="check('dead')"
-            />
-            <label for="dead">{{ $t('dead') }}</label>
-          </div>
-          <div class="flex items-center space-x-0.5">
-            <input
-              id="radio_unknown"
-              type="checkbox"
-              class="w-5 h-5 accent-rick-green dark:outline-black"
-              v-model="statusCheckBoxes.unknown"
-              @change="check('unknown')"
-            />
-            <label for="unknown">{{ $t('unknown') }}</label>
-          </div>
-        </fieldset>
+        <GridStatus
+          :filter="statusFilter"
+          v-model:value="statusFilter"
+          @update-status="updateStatus($event)"
+        ></GridStatus>
       </form>
-      <div
-        v-if="characterList.length > 0"
-        class="grid grid-cols-2 gap-8 mx-auto mt-4 w-max place-items-stretch sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-      >
-        <CharacterCard
-          :id="c.id"
-          :name="c.name"
-          :status="c.status.toLowerCase()"
-          :imageURL="c.image"
-          v-for="c in characterList"
-          :key="c.id"
-        ></CharacterCard>
-      </div>
-      <div class="mx-auto min-w-75vw" v-else>{{ $t('no-result') }}</div>
+      <GridCharacterList :characters="characterList"></GridCharacterList>
     </div>
-    <div
-      v-if="store.state.characterStore.info.pages > 1"
-      class="flex items-center justify-center my-8 space-x-2 text-2xl"
-    >
-      <div class="flex items-center space-x-2">
-        <button
-          class="navigation-chevron"
-          :disabled="canNavigate(-1)"
-          @click="navigate(-1)"
-        >
-          <icon-mdi-chevron-left />
-        </button>
-      </div>
-      <span>{{ currentPage }}</span>
-      <div class="flex items-center space-x-2">
-        <span>&nbsp;/ {{ store.state.characterStore.info.pages }}</span>
-        <button
-          class="navigation-chevron"
-          :disabled="canNavigate(1)"
-          @click="navigate(1)"
-        >
-          <icon-mdi-chevron-right />
-        </button>
-      </div>
-    </div>
+    <GridNavigation
+      :current-page="currentPage"
+      @navigate="navigate($event)"
+    ></GridNavigation>
   </div>
 </template>
 
@@ -112,12 +31,7 @@ import { APIParams } from '../types/interfaces';
 const store = useStore();
 const router = useRouter();
 
-const statusCheckBoxes = ref({
-  dead: ref(false),
-  alive: ref(false),
-  unknown: ref(false),
-});
-
+// Retreives page number from page URL, if it isn't a number, send back to the first page
 const computePageNumber = (): number | undefined => {
   const pageNb = Number(router.currentRoute.value.query.page);
   if (!pageNb) return undefined;
@@ -128,72 +42,38 @@ const computePageNumber = (): number | undefined => {
   return pageNb;
 };
 
-const computePageName = (): string | undefined => {
-  const charName = router.currentRoute.value.query.name;
-  if (!charName) return undefined;
-  return String(charName);
-};
-
-const computePageStatus = (): string | undefined => {
-  const charStatus = router.currentRoute.value.query.status;
-  if (!charStatus) return undefined;
-  const stringParam = String(charStatus) as 'dead' | 'alive' | 'unknown';
-  statusCheckBoxes.value[stringParam] = true;
-  return stringParam;
-};
-
-const statusFilter = ref(computePageStatus() ?? '');
-const nameFilter = ref(computePageName() ?? '');
-const currentPage = ref(computePageNumber() ?? 1);
-
-const check = (status: 'dead' | 'alive' | 'unknown') => {
-  let oneChecked = false;
-  Object.keys(statusCheckBoxes.value).forEach((key) => {
-    const k = key as 'dead' | 'alive' | 'unknown';
-    const v = !statusCheckBoxes.value[k];
-    statusCheckBoxes.value[k] = v ? !v : key === status;
-    oneChecked = statusCheckBoxes.value[k] || oneChecked;
-    if (statusCheckBoxes.value[k]) statusFilter.value = key;
-  });
-  if (!oneChecked) statusFilter.value = '';
-};
+// Filters
+const statusFilter = ref('');
+const nameFilter = ref('');
+const currentPage = ref();
 
 const characterList = computed(() => store.state.characterStore.characters);
 
-const loadData = () => {
-  const params: APIParams = {
-    status: statusFilter.value,
-    name: nameFilter.value,
-    page: currentPage.value,
-  };
+const loadData = (params: APIParams) => {
   store.dispatch('fetchCharacters', params);
-};
-loadData();
-
-const navigate = (pageOffset: number) => {
-  if (canNavigate(pageOffset)) return;
-  currentPage.value = currentPage.value + pageOffset;
-  goToPage(currentPage.value);
-  loadData();
-};
-
-const canNavigate = (pageOffset: number) => {
-  const n = currentPage.value + pageOffset;
-  return n < 1 || n > store.state.characterStore.info.pages;
 };
 
 const filterData = () => {
   goToPage(1);
-  loadData();
 };
 
-watch(statusFilter, () => {
-  filterData();
-});
+// Update URL params
+const navigate = (newPage: number) => {
+  currentPage.value = newPage;
+  goToPage(currentPage.value);
+};
 
+// When status is updated, go back to first page
+const updateStatus = (event: string) => {
+  statusFilter.value = event;
+  goToPage(1);
+};
+
+// Update the URL to match the filters
 const goToPage = (pageNb: number) => {
   currentPage.value = pageNb;
   let params: APIParams = {};
+  // Check values in order to avoid blank values in query params
   if (nameFilter.value) params.name = nameFilter.value;
   if (statusFilter.value) params.status = statusFilter.value;
   if (currentPage.value) params.page = currentPage.value;
@@ -202,10 +82,16 @@ const goToPage = (pageNb: number) => {
     query: params as LocationQueryRaw,
   });
 };
-</script>
 
-<style scoped>
-.navigation-chevron {
-  @apply leading-none bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default) dark:(bg-black bg-opacity-20 hover:bg-opacity-40 disabled:bg-opacity-10);
-}
-</style>
+// Everytime the URL is changed, we update the data
+watch(
+  () => router.currentRoute.value.query,
+  (params: APIParams) => {
+    statusFilter.value = params.status ?? '';
+    nameFilter.value = params.name ?? '';
+    currentPage.value = computePageNumber() ?? 1;
+    loadData(params);
+  },
+  { immediate: true }
+);
+</script>

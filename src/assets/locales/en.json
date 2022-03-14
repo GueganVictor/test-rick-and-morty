@@ -27,5 +27,6 @@
   "type": "Type",
   "episodes": "Number of appearances",
   "error": "Error !",
-  "character-not-found": "Unable to load the character"
+  "character-not-found": "Unable to load the character",
+  "try-different-query": "Try a different query"
 }
