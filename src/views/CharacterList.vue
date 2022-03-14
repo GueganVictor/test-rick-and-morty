@@ -6,13 +6,16 @@
         @keydown.enter.prevent="goToPage(1, nameFilter)"
         @submit.prevent="goToPage(1, nameFilter)"
       >
-        <button
-          v-if="isFiltering()"
-          class="absolute flex items-center text-black bg-rick-green rounded-full pr-3 pl-2 py-0.5 left-0 -top-9 hover:bg-rick-green-darken"
-          @click="resetFilter"
-        >
-          <icon-mdi-broom class="leading-none rounded-full" /> {{ $t('clear-filter') }}
-        </button>
+        <div class="absolute flex space-x-2 left-0 -top-8">
+          <label for="filter-search">{{ $t('search-by-name') }} : </label>
+          <button
+            v-if="isFiltering()"
+            class="flex items-center text-black bg-rick-green rounded-full pr-3 pl-2 py-0.5 hover:bg-rick-green-darken"
+            @click="resetFilter"
+          >
+            <icon-mdi-broom class="leading-none rounded-full" /> {{ $t('clear-filter') }}
+          </button>
+        </div>
         <GridFilterSearch
           :filter="nameFilter"
           v-model:value="nameFilter"

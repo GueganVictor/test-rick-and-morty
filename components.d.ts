@@ -25,6 +25,7 @@ declare module 'vue' {
     IconMdiCircle: typeof import('~icons/mdi/circle')['default']
     IconMdiClose: typeof import('~icons/mdi/close')['default']
     IconMdiEraser: typeof import('~icons/mdi/eraser')['default']
+    IconMdiSearch: typeof import('~icons/mdi/search')['default']
   }
 }
 

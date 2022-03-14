@@ -8,6 +8,7 @@
         class="navigation-chevron"
         :disabled="canNavigate(-1)"
         @click="navigate(-1)"
+        :aria-label="$t('navigate-left')"
       >
         <icon-mdi-chevron-left />
       </button>
@@ -15,7 +16,12 @@
     <span>{{ currentPage }}</span>
     <div class="flex items-center space-x-2">
       <span>&nbsp;/ {{ store.state.characterStore.info.pages }}</span>
-      <button class="navigation-chevron" :disabled="canNavigate(1)" @click="navigate(1)">
+      <button
+        class="navigation-chevron"
+        :disabled="canNavigate(1)"
+        @click="navigate(1)"
+        :aria-label="$t('navigate-right')"
+      >
         <icon-mdi-chevron-right />
       </button>
     </div>

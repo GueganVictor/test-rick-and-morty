@@ -1,7 +1,8 @@
 <template>
   <router-link
     :to="`/characters/${id}`"
-    class="flex flex-col justify-center overflow-hidden border-4 text-center text-black cursor-pointer bg-white border-dark-800 rounded-xl w-35 xs:w-50 sm:w-40 md:w-55 lg:w-62.5 card-highlight card-dark card-animation"
+    class="flex flex-col justify-center overflow-hidden border-4 text-center text-black cursor-pointer bg-white border-dark-800 rounded-xl w-35 
+           xs:w-50 sm:w-40 md:w-55 lg:w-62.5 card-highlight card-dark card-animation"
   >
     <img
       :src="imageURL"
