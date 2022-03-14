@@ -12,7 +12,7 @@ export default {
   /**
    * Retrieves characters from API
    * @param params Query parameters
-   * @returns Promise containing the list of all characters and data informations
+   * @returns Promise containing the list of all characters and data information
    */
   getCharacters(params: APIParams): Promise<AxiosResponse<ICharacter[]>> {
     return serviceInstance.get('', { params });

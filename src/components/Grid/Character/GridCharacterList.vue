@@ -5,17 +5,17 @@
     class="grid grid-cols-2 gap-8 mx-auto mt-4 w-max place-items-stretch sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
   >
     <GridCharacterCard
-      class="transition-opacity"
+      v-if="characters.length > 0"
       v-for="c in characters"
       :key="c.id"
-      v-if="characters.length > 0"
       :id="c.id"
       :name="c.name"
       :status="c.status.toLowerCase()"
       :imageURL="c.image"
+      class="transit-opacity"
     ></GridCharacterCard>
     <GridSkeletonCard
-      class="transition-opacity"
+      class="transit-opacity"
       v-else-if="store.state.characterStore.loading"
       v-for="i in 20"
       :key="i"
@@ -42,8 +42,7 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.transition-opacity {
-  display: hidden;
+.transit-opacity {
   -webkit-animation: fadeInFromNone 0.5s ease-out;
   -moz-animation: fadeInFromNone 0.5s ease-out;
   -o-animation: fadeInFromNone 0.5s ease-out;
