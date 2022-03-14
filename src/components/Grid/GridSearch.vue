@@ -35,12 +35,16 @@ const props = defineProps({
     default: '',
   },
 });
-
 const emit = defineEmits(['update:value']);
 
+// Vue Modules
+const route = useRoute();
+
+/**
+ * Emits value update event to parent component
+ * @param event Search input HTML Event
+ */
 const emitUpdate = (event: Event) => {
   emit('update:value', (<HTMLInputElement>event.target).value);
 };
-
-const route = useRoute();
 </script>

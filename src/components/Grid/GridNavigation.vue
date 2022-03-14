@@ -31,16 +31,25 @@ const props = defineProps({
     required: true,
   },
 });
-
 const emit = defineEmits(['navigate']);
 
+// Vue Modules
 const store = useStore();
 
+/**
+ * Returns if navigation is available to new page
+ * @param pageOffset Offset from current page number
+ * @returns Is navigation avaible to new page
+ */
 const canNavigate = (pageOffset: number) => {
   const n = props.currentPage + pageOffset;
   return n < 1 || n > store.state.characterStore.info.pages;
 };
 
+/**
+ * Emits navigation update to parent componenet if available
+ * @param pageOffset Offset from current page number
+ */
 const navigate = (pageOffset: number) => {
   if (canNavigate(pageOffset)) return;
   emit('navigate', props.currentPage + pageOffset);

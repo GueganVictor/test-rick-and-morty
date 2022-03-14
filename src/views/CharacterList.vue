@@ -3,8 +3,8 @@
     <div class="mx-auto w-min">
       <form
         class="relative items-center block space-y-2 sm:(flex space-y-0)"
-        @keydown.enter.prevent="filterData"
-        @submit.prevent="filterData"
+        @keydown.enter.prevent="goToPage(1)"
+        @submit.prevent="goToPage(1)"
       >
         <button v-if="isFiltering()" class="absolute left-0 -top-7" @click="resetFilter">
           reset filters
@@ -21,7 +21,7 @@
     </div>
     <GridNavigation
       :current-page="currentPage"
-      @navigate="navigate($event)"
+      @navigate="goToPage($event)"
     ></GridNavigation>
   </div>
 </template>
@@ -32,10 +32,22 @@ import { LocationQueryRaw, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { APIParams } from '../types/interfaces';
 
+// Vue Modules
 const store = useStore();
 const router = useRouter();
 
-// Retreives page number from page URL, if it isn't a number, send back to the first page
+// Data
+const characterList = computed(() => store.state.characterStore.characters);
+
+// Filters
+const statusFilter = ref('');
+const nameFilter = ref('');
+const currentPage = ref(1);
+
+/**
+ * Retreives page number from page URL, if it isn't a number, send back to the first page
+ * @returns The new page number or undefined
+ */
 const computePageNumber = (): number | undefined => {
   const pageNb = Number(router.currentRoute.value.query.page);
   if (!pageNb) return undefined;
@@ -46,45 +58,46 @@ const computePageNumber = (): number | undefined => {
   return pageNb;
 };
 
-// Filters
-const statusFilter = ref('');
-const nameFilter = ref('');
-const currentPage = ref(1);
-
-const characterList = computed(() => store.state.characterStore.characters);
-
+/**
+ * Makes and API call and fetches data to the store
+ * @param params Query parameters (name, status and page number)
+ */
 const loadData = (params: APIParams) => {
   store.dispatch('fetchCharacters', params);
 };
 
-const filterData = () => {
-  goToPage(1);
-};
-
-// Update URL params
-const navigate = (newPage: number) => {
-  currentPage.value = newPage;
-  goToPage(currentPage.value);
-};
-
-// When status is updated, go back to first page
+/**
+ * Handler for status update from the StatusComponent
+ * Sets the status and navigate to first page
+ * @param event New status to be set
+ */
 const updateStatus = (event: string) => {
   statusFilter.value = event;
   goToPage(1);
 };
 
+/**
+ * Is the list being filtered by the character's status or name
+ * @returns filtering status
+ */
 const isFiltering = () => {
   return statusFilter.value !== '' || nameFilter.value !== '';
 };
 
+/**
+ * Resets the name and status filter
+ * Then navigate to the first page
+ */
 const resetFilter = () => {
-  console.log('reset omg!!!');
   statusFilter.value = 'reset';
   nameFilter.value = '';
   goToPage(1);
 };
 
-// Update the URL to match the filters
+/**
+ * Updates the URL parameters to match the filters
+ * @param pageNb New page number
+ */
 const goToPage = (pageNb: number) => {
   currentPage.value = pageNb;
   let params: APIParams = {};
@@ -98,15 +111,21 @@ const goToPage = (pageNb: number) => {
   });
 };
 
+/**
+ * Update filter values to match URL parameters
+ * @param params Query parameters (name, status and page number)
+ */
+const updateFilterValues = (params: APIParams) => {
+  statusFilter.value = params.status ?? '';
+  nameFilter.value = params.name ?? '';
+  currentPage.value = computePageNumber() ?? 1;
+  loadData(params);
+};
+
 // Everytime the URL is changed, we update the data
-watch(
-  () => router.currentRoute.value.query,
-  (params: APIParams) => {
-    statusFilter.value = params.status ?? '';
-    nameFilter.value = params.name ?? '';
-    currentPage.value = computePageNumber() ?? 1;
-    loadData(params);
-  },
-  { immediate: true }
-);
+// Watcher is called on page laod in order to retreive
+// filter values from URL parameters
+watch(() => router.currentRoute.value.query, updateFilterValues, {
+  immediate: true,
+});
 </script>

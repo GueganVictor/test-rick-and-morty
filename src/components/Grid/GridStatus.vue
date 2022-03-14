@@ -43,14 +43,7 @@ const props = defineProps({
     default: '',
   },
 });
-
-// Watch for reset action, then uncheck everybox
-watch(
-  () => props.filter,
-  (status) => {
-    if (status === 'reset') check('');
-  }
-);
+const emit = defineEmits(['update-status']);
 
 const statusCheckBoxes = ref({
   dead: ref(false),
@@ -58,14 +51,16 @@ const statusCheckBoxes = ref({
   unknown: ref(false),
 });
 
-const emit = defineEmits(['update-status']);
-
 if (props.filter !== 'reset') {
   statusCheckBoxes.value[props.filter] = true;
 }
 
+/**
+ * Loops through checkboxes, uncheck undesired ones and
+ * emits an event with the new value
+ * @param status New desired status
+ */
 const check = (status: Status | '') => {
-  console.log('test');
   let oneChecked = false;
   // Loop through each checkbox
   (<Status[]>Object.keys(statusCheckBoxes.value)).forEach((key) => {
@@ -82,4 +77,12 @@ const check = (status: Status | '') => {
   // If no checkbox is checked, we update the fitler to be empty
   if (!oneChecked) emit('update-status', '');
 };
+
+// Watch for reset action, then uncheck every box
+watch(
+  () => props.filter,
+  (status) => {
+    if (status === 'reset') check('');
+  }
+);
 </script>
