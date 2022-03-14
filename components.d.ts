@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CharacterImage: typeof import('./src/components/Character/CharacterImage.vue')['default']
     Footer: typeof import('./src/components/Layout/Footer.vue')['default']
     GridCharacterCard: typeof import('./src/components/Grid/Character/GridCharacterCard.vue')['default']
     GridCharacterList: typeof import('./src/components/Grid/Character/GridCharacterList.vue')['default']

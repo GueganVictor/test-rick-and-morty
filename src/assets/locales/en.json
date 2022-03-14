@@ -29,5 +29,7 @@
   "error": "Error !",
   "character-not-found": "Unable to load the character",
   "try-different-query": "Try a different query",
-  "created": "Created"
+  "created": "Created",
+  "character_list": "Character List",
+  "app_name": "Rick & Morty Explorator"
 }

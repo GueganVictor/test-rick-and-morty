@@ -29,5 +29,7 @@
   "error": "Erreur !",
   "character-not-found": "Impossible de charger le personnage",
   "try-different-query": "Essayez une autre recherche",
-  "created": "Créé le"
+  "created": "Créé le",
+  "character_list": "Liste des personnages",
+  "app_name": "Rick & Morty Explorateur"
 }

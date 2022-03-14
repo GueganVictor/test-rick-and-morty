@@ -13,10 +13,10 @@
         >
           <icon-mdi-close class="text-sm" />Reset filters
         </button>
-        <GridFitlerSearch
+        <GridFilterSearch
           :filter="nameFilter"
           v-model:value="nameFilter"
-        ></GridFitlerSearch>
+        ></GridFilterSearch>
         <div class="flex-grow" />
         <GridFilterStatus
           :filter="statusFilter"
@@ -34,7 +34,9 @@
 </template>
 
 <script setup lang="ts">
+import { useTitle } from '@vueuse/core';
 import { computed, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { LocationQueryRaw, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { APIParams } from '../types/interfaces';
@@ -42,6 +44,7 @@ import { APIParams } from '../types/interfaces';
 // Vue Modules
 const store = useStore();
 const router = useRouter();
+const i18n = useI18n();
 
 // Data
 const characterList = computed(() => store.state.characterStore.characters);
@@ -135,4 +138,6 @@ const updateFilterValues = (params: APIParams) => {
 watch(() => router.currentRoute.value.query, updateFilterValues, {
   immediate: true,
 });
+
+useTitle(i18n.t('character_list') + ' - ' + i18n.t('app_name'));
 </script>
