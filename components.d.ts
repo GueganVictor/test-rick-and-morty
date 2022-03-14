@@ -23,6 +23,7 @@ declare module 'vue' {
     IconMdiChevronLeft: typeof import('~icons/mdi/chevron-left')['default']
     IconMdiChevronRight: typeof import('~icons/mdi/chevron-right')['default']
     IconMdiCircle: typeof import('~icons/mdi/circle')['default']
+    IconMdiClose: typeof import('~icons/mdi/close')['default']
   }
 }
 

@@ -6,8 +6,12 @@
         @keydown.enter.prevent="goToPage(1)"
         @submit.prevent="goToPage(1)"
       >
-        <button v-if="isFiltering()" class="absolute left-0 -top-7" @click="resetFilter">
-          reset filters
+        <button
+          v-if="isFiltering()"
+          class="absolute flex items-center left-0 -top-7"
+          @click="resetFilter"
+        >
+          <icon-mdi-close class="text-sm" />Reset filters
         </button>
         <GridSearch :filter="nameFilter" v-model:value="nameFilter"></GridSearch>
         <div class="flex-grow" />

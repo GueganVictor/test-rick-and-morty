@@ -50,7 +50,7 @@
           <p class="text-xl">{{ char.episode.length }}</p>
         </div>
         <div>
-          <label class="text-sm char-label">Created</label>
+          <label class="text-sm char-label">{{ $t('created') }}</label>
           <p class="text-xl">{{ new Date(char.created).toLocaleDateString() }}</p>
         </div>
       </div>

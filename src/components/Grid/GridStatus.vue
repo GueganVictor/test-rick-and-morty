@@ -1,6 +1,6 @@
 <template>
   <fieldset class="flex space-x-4">
-    <div class="flex items-center space-x-0.5">
+    <div class="flex items-center space-x-1">
       <input
         id="radio_alive"
         type="checkbox"
@@ -8,9 +8,9 @@
         v-model="statusCheckBoxes.alive"
         @change="check('alive')"
       />
-      <label for="alive">{{ $t('alive') }}</label>
+      <label for="radio_alive">{{ $t('alive') }}</label>
     </div>
-    <div class="flex items-center space-x-0.5">
+    <div class="flex items-center space-x-1">
       <input
         id="radio_dead"
         type="checkbox"
@@ -18,9 +18,9 @@
         v-model="statusCheckBoxes.dead"
         @change="check('dead')"
       />
-      <label for="dead">{{ $t('dead') }}</label>
+      <label for="radio_dead">{{ $t('dead') }}</label>
     </div>
-    <div class="flex items-center space-x-0.5">
+    <div class="flex items-center space-x-1">
       <input
         id="radio_unknown"
         type="checkbox"
@@ -28,7 +28,7 @@
         v-model="statusCheckBoxes.unknown"
         @change="check('unknown')"
       />
-      <label for="unknown">{{ $t('unknown') }}</label>
+      <label for="radio_unknown">{{ $t('unknown') }}</label>
     </div>
   </fieldset>
 </template>

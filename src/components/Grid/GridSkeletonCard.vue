@@ -10,7 +10,7 @@
 <style scoped>
 #skeleton {
   animation: fade 1s infinite forwards;
-  background-color: rgba(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
 }
 
 @keyframes fade {
