@@ -1,4 +1,4 @@
-import { APIParams } from './../types/interfaces';
+import { APIParams } from '../types/interfaces';
 import axios, { AxiosResponse } from 'axios';
 import { ICharacter } from '../types/character';
 
@@ -9,10 +9,20 @@ const serviceInstance = axios.create({
 });
 
 export default {
-  getProjects(params: APIParams): Promise<AxiosResponse<ICharacter[]>> {
+  /**
+   * Retrieves characters from API
+   * @param params Query parameters
+   * @returns Promise containing the list of all characters and data informations
+   */
+  getCharacters(params: APIParams): Promise<AxiosResponse<ICharacter[]>> {
     return serviceInstance.get('', { params });
   },
-  getProject(_id: number): Promise<AxiosResponse<ICharacter>> {
+  /**
+   * Retrieves character by id from API
+   * @param _id id of desired character
+   * @returns Promise containing the character
+   */
+  getCharacter(_id: number): Promise<AxiosResponse<ICharacter>> {
     return serviceInstance.get(`${_id}`);
   },
 };
