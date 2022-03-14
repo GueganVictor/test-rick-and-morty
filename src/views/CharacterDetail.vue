@@ -90,7 +90,7 @@ const char: ComputedRef<ICharacter | undefined> = computed(() =>
 
 /**
  * Returns the attribute or the translation of unknown if it's undefined
- * @param attribute attribute of the character
+ * @param att attribute of the character
  * @returns The attribute or 'Unknown'
  */
 const formatAttribute = (att: string) => {
