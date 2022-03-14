@@ -26,7 +26,17 @@
   "status": "Status",
   "type": "Type",
   "episodes": "Number of appearances",
-  "error": "Error !",
+  "error": "Error",
   "character-not-found": "Unable to load the character",
-  "try-different-query": "Try a different query"
+  "try-different-query": "Try a different query",
+  "created": "Created",
+  "character_list": "Character List",
+  "app_name": "Rick & Morty Explorator",
+  "female": "Female",
+  "male": "Male",
+  "clear-filter": "Clear filters",
+  "navigate-left": "Navigate left",
+  "navigate-right": "Navigate right",
+  "example-search": "eg. Rick Sanchez",
+  "search-by-name": "Search by name"
 }

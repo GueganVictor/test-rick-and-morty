@@ -8,6 +8,7 @@
         class="navigation-chevron"
         :disabled="canNavigate(-1)"
         @click="navigate(-1)"
+        :aria-label="$t('navigate-left')"
       >
         <icon-mdi-chevron-left />
       </button>
@@ -15,7 +16,12 @@
     <span>{{ currentPage }}</span>
     <div class="flex items-center space-x-2">
       <span>&nbsp;/ {{ store.state.characterStore.info.pages }}</span>
-      <button class="navigation-chevron" :disabled="canNavigate(1)" @click="navigate(1)">
+      <button
+        class="navigation-chevron"
+        :disabled="canNavigate(1)"
+        @click="navigate(1)"
+        :aria-label="$t('navigate-right')"
+      >
         <icon-mdi-chevron-right />
       </button>
     </div>
@@ -39,7 +45,7 @@ const store = useStore();
 /**
  * Returns if navigation is available to new page
  * @param pageOffset Offset from current page number
- * @returns Is navigation avaible to new page
+ * @returns Is navigation available to new page
  */
 const canNavigate = (pageOffset: number) => {
   const n = props.currentPage + pageOffset;
@@ -47,7 +53,7 @@ const canNavigate = (pageOffset: number) => {
 };
 
 /**
- * Emits navigation update to parent componenet if available
+ * Emits navigation update to parent component if available
  * @param pageOffset Offset from current page number
  */
 const navigate = (pageOffset: number) => {
@@ -58,6 +64,6 @@ const navigate = (pageOffset: number) => {
 
 <style scoped>
 .navigation-chevron {
-  @apply leading-none bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default) dark:(bg-black bg-opacity-20 hover:bg-opacity-40 disabled:bg-opacity-10);
+  @apply leading-none h-7.2 w-7.2 bg-white rounded-full bg-opacity-20 disabled:(bg-opacity-5 cursor-default) dark:(bg-black bg-opacity-20 hover:bg-opacity-40 disabled:bg-opacity-10);
 }
 </style>

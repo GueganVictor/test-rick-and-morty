@@ -2,16 +2,17 @@
   <div class="flex items-center space-x-2">
     <div class="flex items-center overflow-hidden rounded">
       <input
+        id="filter-search"
+        :placeholder="$t('example-search')"
         :value="filter"
         @input="emitUpdate($event)"
-        class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 bg-white border-2 border-white border-solid bg-clip-padding transition ease-in-out
+        class="relative block w-full h-10 min-w-0 px-3 m-0 text-base font-normal text-gray-700 bg-white border-2 border-white border-solid bg-clip-padding transition ease-in-out 
                focus:(text-gray-700 bg-white border-rick-green outline-none)"
         type="text"
       />
       <button
-        class="flex bg-rick-green items-center inline-block h-10 px-6 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out shadow-md 
-               hover:(bg-rick-green-darken shadow-lg) focus:(bg-rick-green-darken shadow-lg ring-0) 
-               active:(shadow-lg bg-blue-800) dark:(text-black)"
+        class="flex bg-rick-green items-center inline-block space-x-2 h-10 px-6 text-xs text-black font-medium leading-tight uppercase transition duration-150 ease-in-out shadow-md 
+               hover:(bg-rick-green-darken shadow-lg) focus:(bg-rick-green-darken shadow-lg ring-0) active:(shadow-lg bg-blue-800)"
         type="submit"
       >
         {{ $t('search') }}

@@ -1,9 +1,8 @@
 <template>
   <router-link
     :to="`/characters/${id}`"
-    class="flex flex-col justify-center overflow-hidden border-4 text-center text-black cursor-pointer bg-white border-black rounded-xl w-35 
-           xs:w-50 sm:w-40 md:w-55 lg:w-62.5 
-           card-highlight card-dark card-animation"
+    class="flex flex-col justify-center overflow-hidden border-4 text-center text-black cursor-pointer bg-white border-dark-800 rounded-xl w-35 
+           xs:w-50 sm:w-40 md:w-55 lg:w-62.5 card-highlight card-dark card-animation"
   >
     <img
       :src="imageURL"
@@ -34,7 +33,7 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Status } from '../../types/interfaces';
+import { Status } from '../../../types/interfaces';
 
 const props = defineProps({
   id: {
@@ -47,7 +46,7 @@ const props = defineProps({
   },
   imageURL: {
     type: String,
-    default: 'http://via.placeholder.com/200x200',
+    default: 'src/assets/img/char_placeholder.jpg',
   },
   status: {
     type: String as PropType<Status>,

@@ -1,40 +1,24 @@
 <template>
   <fieldset class="flex space-x-4">
-    <div class="flex items-center space-x-0.5">
+    <div
+      v-for="cbStatus in typedStatusCheckboxesKey()"
+      :key="cbStatus"
+      class="flex items-center space-x-1"
+    >
       <input
-        id="radio_alive"
+        :id="`radio_${cbStatus}`"
         type="checkbox"
         class="w-5 h-5 accent-rick-green dark:outline-black"
-        v-model="statusCheckBoxes.alive"
-        @change="check('alive')"
+        v-model="statusCheckBoxes[cbStatus]"
+        @change="check(cbStatus)"
       />
-      <label for="alive">{{ $t('alive') }}</label>
-    </div>
-    <div class="flex items-center space-x-0.5">
-      <input
-        id="radio_dead"
-        type="checkbox"
-        class="w-5 h-5 accent-rick-green dark:outline-black"
-        v-model="statusCheckBoxes.dead"
-        @change="check('dead')"
-      />
-      <label for="dead">{{ $t('dead') }}</label>
-    </div>
-    <div class="flex items-center space-x-0.5">
-      <input
-        id="radio_unknown"
-        type="checkbox"
-        class="w-5 h-5 accent-rick-green dark:outline-black"
-        v-model="statusCheckBoxes.unknown"
-        @change="check('unknown')"
-      />
-      <label for="unknown">{{ $t('unknown') }}</label>
+      <label :for="`radio_${cbStatus}`">{{ $t(cbStatus) }}</label>
     </div>
   </fieldset>
 </template>
 
 <script setup lang="ts">
-import { Status } from '../../types/interfaces';
+import { Status } from '../../../types/interfaces';
 import { PropType, ref, watch } from 'vue';
 
 const props = defineProps({
@@ -51,9 +35,13 @@ const statusCheckBoxes = ref({
   unknown: ref(false),
 });
 
-if (props.filter !== 'reset') {
+if (props.filter && props.filter !== 'reset') {
   statusCheckBoxes.value[props.filter] = true;
 }
+
+const typedStatusCheckboxesKey = () => {
+  return <Status[]>Object.keys(statusCheckBoxes.value);
+};
 
 /**
  * Loops through checkboxes, uncheck undesired ones and
@@ -63,7 +51,7 @@ if (props.filter !== 'reset') {
 const check = (status: Status | '') => {
   let oneChecked = false;
   // Loop through each checkbox
-  (<Status[]>Object.keys(statusCheckBoxes.value)).forEach((key) => {
+  typedStatusCheckboxesKey().forEach((key) => {
     const v = statusCheckBoxes.value[key];
 
     // If the current checkbox is already we uncheck it. Otherwise if
@@ -74,7 +62,7 @@ const check = (status: Status | '') => {
     // Update/Send the new checked box value to the filter
     if (statusCheckBoxes.value[key]) emit('update-status', key);
   });
-  // If no checkbox is checked, we update the fitler to be empty
+  // If no checkbox is checked, we update the filter to be empty
   if (!oneChecked) emit('update-status', '');
 };
 

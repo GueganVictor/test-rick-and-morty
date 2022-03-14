@@ -25,8 +25,18 @@
   "gender": "Genre",
   "status": "Statut",
   "type": "Type",
-  "episodes": "Nombre d'apparition",
-  "error": "Erreur !",
+  "episodes": "Nombre d'apparitions",
+  "error": "Erreur",
   "character-not-found": "Impossible de charger le personnage",
-  "try-different-query": "Essayez une autre recherche"
+  "try-different-query": "Essayez une autre recherche",
+  "created": "Créé le",
+  "character_list": "Liste des personnages",
+  "app_name": "Rick & Morty Explorateur",
+  "female": "Femelle",
+  "male": "Male",
+  "clear-filter": "Réinitialiser les filtres",
+  "navigate-left": "Naviguer à gauche",
+  "navigate-right": "Naviguer à droite",
+  "example-search": "ex. Rick Sanchez",
+  "search-by-name": "Rechercher par nom"
 }

@@ -12,7 +12,7 @@ const config = defineConfig({
       },
       colors: {
         'rick-green': '#97ce4c',
-        'rick-green-darken': '#699035',
+        'rick-green-darken': '#7eb431',
         beige: '#fde0b2',
       },
       fontFamily: {

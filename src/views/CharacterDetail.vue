@@ -1,56 +1,64 @@
 <template>
-  <div class="mx-auto w-max" v-if="char">
-    <button
-      @click="goBack()"
-      class="flex items-center space-x-1 border-b border-transparent hover:border-white dark:hover:border-black"
-    >
-      <icon-mdi-arrow-left />
-      <p>{{ $t('return-to-list') }}</p>
-    </button>
-    <h1 class="mt-1 mb-8 text-3xl sm:text-5xl">
-      <span class="char-label">#{{ char.id }}</span>
-      {{ char.name }}
-    </h1>
-    <div class="block sm:(flex space-x-8 items-center)">
-      <div class="overflow-hidden rounded-full w-40 h-40 sm:(w-50 h-50)">
-        <img
-          :src="char.image"
-          :alt="$t('picture_of') + char.name"
-          width="200"
-          height="200"
-        />
+  <div class="w-max mx-auto" v-if="char">
+    <div class="flex items-center">
+      <div>
+        <button
+          @click="goBack()"
+          class="flex items-center space-x-1 border-b border-transparent hover:border-white dark:hover:border-black"
+        >
+          <icon-mdi-arrow-left />
+          <p>{{ $t('return-to-list') }}</p>
+        </button>
+        <h1 class="mt-1 mb-8 text-3xl sm:text-5xl">
+          <span class="char-label">#{{ char.id }}</span>
+          {{ char.name }}
+        </h1>
       </div>
-      <div class="grid grid-cols-1 gap-1 sm:(grid-cols-2 gap-4) md:grid-cols-3 w-max">
-        <div>
+      <CharacterImage
+        class="hidden sm:block lg:hidden w-30 h-30 ml-8"
+        :image="char.image"
+        :name="char.name"
+      />
+    </div>
+    <div class="block sm:(flex items-center)">
+      <CharacterImage
+        class="block sm:hidden lg:block rounded-full w-40 h-40 sm:(w-50 h-50)"
+        :image="char.image"
+        :name="char.name"
+      />
+      <div
+        class="grid max-w-150 grid-cols-1 gap-1 sm:(grid-cols-2 gap-4) lg:(grid-cols-3 ml-8)"
+      >
+        <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('species') }}</label>
           <p class="text-xl">{{ formatAttribute(char.species) }}</p>
         </div>
-        <div>
+        <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('origin') }}</label>
           <p class="text-xl">{{ formatAttribute(char.origin.name) }}</p>
         </div>
-        <div>
+        <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('location') }}</label>
           <p class="text-xl">{{ formatAttribute(char.location.name) }}</p>
         </div>
-        <div>
+        <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('gender') }}</label>
-          <p class="text-xl">{{ formatAttribute(char.gender) }}</p>
+          <p class="text-xl">{{ $t(char.gender.toLocaleLowerCase()) }}</p>
         </div>
-        <div>
+        <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('status') }}</label>
-          <p class="text-xl">{{ formatAttribute(char.status) }}</p>
+          <p class="text-xl">{{ $t(char.status.toLocaleLowerCase()) }}</p>
         </div>
-        <div>
+        <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('type') }}</label>
           <p class="text-xl">{{ formatAttribute(char.type) }}</p>
         </div>
-        <div>
+        <div class="max-w-90vw">
           <label class="text-sm char-label">{{ $t('episodes') }}</label>
           <p class="text-xl">{{ char.episode.length }}</p>
         </div>
-        <div>
-          <label class="text-sm char-label">Created</label>
+        <div class="max-w-90vw">
+          <label class="text-sm char-label">{{ $t('created') }}</label>
           <p class="text-xl">{{ new Date(char.created).toLocaleDateString() }}</p>
         </div>
       </div>
@@ -58,10 +66,10 @@
   </div>
   <div v-else class="flex justify-center px-10">
     <div class="text-center mt-25">
-      <h1 class="text-3xl font-bold">{{ $t('error') }}</h1>
+      <h1 class="text-3xl font-bold">{{ $t('error') }} !</h1>
       <h1 class="mb-4 text-2xl">{{ $t('character-not-found') }}</h1>
       <router-link to="/">
-        <p class="mx-auto text-xl border-b border-black w-max">
+        <p class="mx-auto text-xl border-b border-white dark:border-black w-max">
           {{ $t('return-to-list') }}
         </p>
       </router-link>
@@ -70,6 +78,7 @@
 </template>
 
 <script setup lang="ts">
+import { useTitle } from '@vueuse/core';
 import { computed, ComputedRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
@@ -90,7 +99,7 @@ const char: ComputedRef<ICharacter | undefined> = computed(() =>
 
 /**
  * Returns the attribute or the translation of unknown if it's undefined
- * @param attribute attribute of the character
+ * @param att attribute of the character
  * @returns The attribute or 'Unknown'
  */
 const formatAttribute = (att: string) => {
@@ -112,6 +121,11 @@ const goBack = () => {
 };
 
 store.dispatch('fetchCharacterById', { id: characterId });
+
+const title = computed(() => {
+  return char.value?.name + ' - ' + i18n.t('app_name');
+});
+useTitle(title);
 </script>
 
 <style scoped>
