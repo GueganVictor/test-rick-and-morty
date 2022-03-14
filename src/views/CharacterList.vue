@@ -2,9 +2,13 @@
   <div class="mx-auto">
     <div class="mx-auto w-min">
       <form
-        class="items-center block space-y-2 sm:(flex space-y-0)"
+        class="relative items-center block space-y-2 sm:(flex space-y-0)"
+        @keydown.enter.prevent="filterData"
         @submit.prevent="filterData"
       >
+        <button v-if="isFiltering()" class="absolute left-0 -top-7" @click="resetFilter">
+          reset filters
+        </button>
         <GridSearch :filter="nameFilter" v-model:value="nameFilter"></GridSearch>
         <div class="flex-grow" />
         <GridStatus
@@ -45,7 +49,7 @@ const computePageNumber = (): number | undefined => {
 // Filters
 const statusFilter = ref('');
 const nameFilter = ref('');
-const currentPage = ref();
+const currentPage = ref(1);
 
 const characterList = computed(() => store.state.characterStore.characters);
 
@@ -66,6 +70,17 @@ const navigate = (newPage: number) => {
 // When status is updated, go back to first page
 const updateStatus = (event: string) => {
   statusFilter.value = event;
+  goToPage(1);
+};
+
+const isFiltering = () => {
+  return statusFilter.value !== '' || nameFilter.value !== '';
+};
+
+const resetFilter = () => {
+  console.log('reset omg!!!');
+  statusFilter.value = 'reset';
+  nameFilter.value = '';
   goToPage(1);
 };
 

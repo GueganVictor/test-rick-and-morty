@@ -35,14 +35,22 @@
 
 <script setup lang="ts">
 import { Status } from '../../types/interfaces';
-import { PropType, ref } from 'vue';
+import { PropType, ref, watch } from 'vue';
 
 const props = defineProps({
   filter: {
-    type: String as PropType<Status>,
+    type: String as PropType<Status | 'reset'>,
     default: '',
   },
 });
+
+// Watch for reset action, then uncheck everybox
+watch(
+  () => props.filter,
+  (status) => {
+    if (status === 'reset') check('');
+  }
+);
 
 const statusCheckBoxes = ref({
   dead: ref(false),
@@ -52,9 +60,12 @@ const statusCheckBoxes = ref({
 
 const emit = defineEmits(['update-status']);
 
-statusCheckBoxes.value[props.filter] = true;
+if (props.filter !== 'reset') {
+  statusCheckBoxes.value[props.filter] = true;
+}
 
-const check = (status: Status) => {
+const check = (status: Status | '') => {
+  console.log('test');
   let oneChecked = false;
   // Loop through each checkbox
   (<Status[]>Object.keys(statusCheckBoxes.value)).forEach((key) => {
