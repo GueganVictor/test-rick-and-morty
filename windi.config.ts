@@ -11,7 +11,9 @@ const config = defineConfig({
         xs: '530px',
       },
       colors: {
-        // primary: "#2D7DD2",
+        'rick-green': '#97ce4c',
+        'rick-green-darken': '#7eb431',
+        beige: '#fde0b2',
       },
       fontFamily: {
         // sans: "Roboto",

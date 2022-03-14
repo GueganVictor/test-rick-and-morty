@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/characters',
-    name: 'CharacteList',
+    name: 'CharacterList',
     component: CharacterListVue,
   },
   {
@@ -19,11 +19,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'CharacterDetail',
     component: CharacterDetailVue,
   },
-  { 
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: PageNotFoundVue
-},
+    component: PageNotFoundVue,
+  },
 ];
 
 export default routes;

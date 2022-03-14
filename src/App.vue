@@ -1,11 +1,15 @@
 <template>
-  <div class="bg-black text-white dark:(bg-amber-200 text-black) w-full">
+  <div
+    class="relative flex flex-col w-full min-h-screen text-white bg-dark-800 dark:(bg-beige text-black)"
+  >
+    <Header></Header>
     <Hero></Hero>
-    <router-view></router-view>
+    <div class="flex-grow">
+      <router-view></router-view>
+    </div>
+
     <Footer></Footer>
   </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>

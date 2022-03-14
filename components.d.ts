@@ -4,19 +4,28 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    CharacterCard: typeof import('./src/components/CharacterCard.vue')['default']
-    Footer: typeof import('./src/components/Footer.vue')['default']
-    Hero: typeof import('./src/components/Hero.vue')['default']
+    CharacterImage: typeof import('./src/components/Character/CharacterImage.vue')['default']
+    Footer: typeof import('./src/components/Layout/Footer.vue')['default']
+    GridCharacterCard: typeof import('./src/components/Grid/Character/GridCharacterCard.vue')['default']
+    GridCharacterList: typeof import('./src/components/Grid/Character/GridCharacterList.vue')['default']
+    GridFilterSearch: typeof import('./src/components/Grid/Filter/GridFilterSearch.vue')['default']
+    GridFilterStatus: typeof import('./src/components/Grid/Filter/GridFilterStatus.vue')['default']
+    GridNavigation: typeof import('./src/components/Grid/GridNavigation.vue')['default']
+    GridSkeletonCard: typeof import('./src/components/Grid/GridSkeletonCard.vue')['default']
+    Header: typeof import('./src/components/Layout/Header.vue')['default']
+    Hero: typeof import('./src/components/Layout/Hero.vue')['default']
     IconCarbonMoon: typeof import('~icons/carbon/moon')['default']
     IconCarbonSun: typeof import('~icons/carbon/sun')['default']
-    IconCifEn: typeof import('~icons/cif/en')['default']
     IconCifFr: typeof import('~icons/cif/fr')['default']
     IconCifGb: typeof import('~icons/cif/gb')['default']
-    'IconCircleFlags:en': typeof import('~icons/ci/rcle-flags-en')['default']
-    'IconCircleFlags:fr': typeof import('~icons/ci/rcle-flags-fr')['default']
-    IconCircleFlagsEn: typeof import('~icons/ci/rcle-flags-en')['default']
-    IconCircleFlagsFr: typeof import('~icons/ci/rcle-flags-fr')['default']
+    IconMdiArrowLeft: typeof import('~icons/mdi/arrow-left')['default']
+    IconMdiBroom: typeof import('~icons/mdi/broom')['default']
+    IconMdiChevronLeft: typeof import('~icons/mdi/chevron-left')['default']
+    IconMdiChevronRight: typeof import('~icons/mdi/chevron-right')['default']
     IconMdiCircle: typeof import('~icons/mdi/circle')['default']
+    IconMdiClose: typeof import('~icons/mdi/close')['default']
+    IconMdiEraser: typeof import('~icons/mdi/eraser')['default']
+    IconMdiSearch: typeof import('~icons/mdi/search')['default']
   }
 }
 
