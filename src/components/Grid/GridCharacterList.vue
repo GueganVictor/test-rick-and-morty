@@ -27,7 +27,9 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
 
+// Vue Modules
 const store = useStore();
+
 const props = defineProps({
   characters: {
     type: Object,

@@ -76,22 +76,33 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { ICharacter } from '../types/character';
 
+// Vue Modules
 const store = useStore();
 const router = useRouter();
 const i18n = useI18n();
 
 const characterId = Number(router.currentRoute.value.params.id);
 
+// Data
 const char: ComputedRef<ICharacter | undefined> = computed(() =>
   store.getters.getStoredCharacterById(characterId)
 );
 
-// If attribute is not defined or unknown we translate it
+/**
+ * Returns the attribute or the translation of unknown if it's undefined
+ * @param attribute attribute of the character
+ * @returns The attribute or 'Unknown'
+ */
 const formatAttribute = (att: string) => {
   if (!att || att === 'unknown') return i18n.t('unknown');
   return att;
 };
 
+/**
+ * Navigate router to previous page in the application
+ * If no previous path is available in the router we navigate
+ * to the characters list
+ */
 const goBack = () => {
   if (!router.options.history.state.back) {
     router.push({ path: '/characters' });

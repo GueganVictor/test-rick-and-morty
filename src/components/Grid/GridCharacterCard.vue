@@ -55,12 +55,20 @@ const props = defineProps({
   },
 });
 
-const { t } = useI18n({
-  inheritLocale: true,
-});
+// Vue Modules
+const { t } = useI18n();
 
-const getName = (name: string) => !name ? t('unknown') : name;
+/**
+ * Returns the name or the translation of unknown if it's undefined
+ * @param name Name of the character
+ * @returns The name or 'Unknown'
+ */
+const getName = (name: string) => (!name ? t('unknown') : name);
 
+/**
+ * Returns the color corresponding to the status
+ * @returns Text color value
+ */
 const getStatusColor = () => {
   const colors = {
     alive: 'text-rick-green',
